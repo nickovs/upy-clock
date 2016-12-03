@@ -1,0 +1,3 @@
+[submodule "ws2812-SIP"]
+	path = ws2812-SIP
+	url = https://github.com/nickovs/ws2812-SIP

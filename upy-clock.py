@@ -30,6 +30,10 @@ import gc
 NTP_DELTA = 3155673600
 tick_delta = utime.ticks_diff
 
+# The clock in the ESP8266 controller is shockingly prone to drift, is
+# often off by several percent and varies widely depending on
+# temperature. This code attempts to compensate for bad local clocks.
+
 class NTPClock:
     def __init__(self, host, history_length = 16):
         # Resolve server address in advance
@@ -186,7 +190,7 @@ def main():
     network_up()
 
     print("Fetching NTP time")
-    nt = NTPClock("10.0.0.222")
+    nt = NTPClock(NTP_SERVER_NAME)
 
     print("Clock set to {}".format(utime.localtime(nt.time())))
 
